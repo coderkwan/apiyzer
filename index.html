@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Less go</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main>
+        <section id="url_verb">
+            <form id="main_form">
+                <select required="true" name="verb" id="verb">
+                    <option value="get">GET</option>
+                    <option value="post">POST</option>
+                    <option value="put">PUT</option>
+                    <option value="delete">DELETE</option>
+                </select>
+                <input required="true" type="url" name="url" placeholder="url">
+                <button type="submit" class="main_btn">Send</button>
+            </form>
+        </section>
+        <section id="headers">
+            <h3>Headers</h3>
+            <div id="headers_container">
+                <p>No headers added!</p>
+            </div>
+            <form id="headers_form">
+                <input required="true" type="text" name="key" placeholder="key" />
+                <input required="true" type="text" name="value" placeholder="value" />
+                <button type="submit" id="add_header">Add header</button>
+            </form>
+        </section>
+        <section id="body">
+            <h3>Body</h3>
+            <div id="body_container">
+                <p>No body data!</p>
+            </div>
+            <form id="body_form">
+                <select required="true" name="content_type" id="content_type">
+                    <option value="application/json">Json</option>
+                    <option value="application/text">Text</option>
+                </select>
+                <textarea required="true" type="json" rows="4" name="body"></textarea>
+                <button type="submit" id="add_body">Add body</button>
+                <p id="body_error"></p>
+            </form>
+        </section>
+        <section>
+            <h3>Response</h3>
+            <div id="response">
+                <p>Your response will appear here!</p>
+
+            </div>
+        </section>
+    </main>
+</body>
+<script src="script.js"></script>
+
+</html>
