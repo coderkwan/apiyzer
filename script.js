@@ -3,37 +3,51 @@ const response = document.getElementById('response')
 const add_header = document.getElementById('add_header')
 const headers_container = document.getElementById('headers_container')
 const body_container = document.getElementById('body_container')
+const response_header = document.getElementById('response_header')
+
+const res_url = document.getElementById('res_url')
+const res_type = document.getElementById('res_type')
+const res_status = document.getElementById('res_status')
 
 let headers = [];
 let body = '';
 let content_type = '';
 
 form.addEventListener('submit', async (e) => {
+    response_header.style.display = "none"
     e.preventDefault();
+
     const url = (e.target.url.value)
     const method = (e.target.verb.value)
+    const final_hearder = {}
+
+    headers.forEach((item) => {
+        final_hearder[item.key] = item.value
+    })
 
     try {
-        const final_hearder = {}
-
-        headers.forEach((item) => {
-            final_hearder[item.key] = item.value
-        })
-
         if (method != 'get') {
             final_hearder['Content-Type'] = content_type
-            const data = await fetch(url, {method: method, headers: final_hearder, body: (body)})
+            const payload = {method: method, headers: final_hearder, body: (body)}
+            const data = await fetch(url, payload)
             const res = await data.json()
-            makeResponse(JSON.stringify(res))
+            makeResponse(JSON.stringify(res), data)
+            console.log(data)
+            response_header.style.display = "flex"
         } else {
-            const data = await fetch(url, {method: method, headers: final_hearder})
+            const payload = {method: method, headers: final_hearder}
+            const data = await fetch(url, payload)
             const res = await data.json()
-            makeResponse(JSON.stringify(res))
+            makeResponse(JSON.stringify(res), data)
+            console.log(data)
+            response_header.style.display = "flex"
         }
+
 
     } catch (e) {
         const res = "Failed to fetch"
-        makeResponse(res)
+        makeResponse(res, null)
+        console.log(e)
     }
 })
 
@@ -93,6 +107,11 @@ body_form.addEventListener('submit', (e) => {
     body_container.appendChild(node_delete)
 })
 
-function makeResponse(res) {
+function makeResponse(res, data) {
     response.innerText = res
+    if (data != null) {
+        res_type.innerText = data.type
+        res_url.innerText = data.url
+        res_status.innerText = data.status
+    }
 }

@@ -10,52 +10,61 @@
 
 <body>
     <main>
-        <section id="url_verb">
-            <form id="main_form">
-                <select required="true" name="verb" id="verb">
-                    <option value="get">GET</option>
-                    <option value="post">POST</option>
-                    <option value="put">PUT</option>
-                    <option value="delete">DELETE</option>
-                </select>
-                <input required="true" type="url" name="url" placeholder="url">
-                <button type="submit" class="main_btn">Send</button>
-            </form>
-        </section>
-        <section id="headers">
-            <h3>Headers</h3>
-            <div id="headers_container">
-                <p>No headers added!</p>
-            </div>
-            <form id="headers_form">
-                <input required="true" type="text" name="key" placeholder="key" />
-                <input required="true" type="text" name="value" placeholder="value" />
-                <button type="submit" id="add_header">Add header</button>
-            </form>
-        </section>
-        <section id="body">
-            <h3>Body</h3>
-            <div id="body_container">
-                <p>No body data!</p>
-            </div>
-            <form id="body_form">
-                <select required="true" name="content_type" id="content_type">
-                    <option value="application/json">Json</option>
-                    <option value="application/text">Text</option>
-                </select>
-                <textarea required="true" type="json" rows="4" name="body"></textarea>
-                <button type="submit" id="add_body">Add body</button>
-                <p id="body_error"></p>
-            </form>
-        </section>
-        <section>
+        <div class="left">
+            <section id="url_verb">
+                <form id="main_form">
+                    <select required="true" name="verb" id="verb">
+                        <option value="get">GET</option>
+                        <option value="post">POST</option>
+                        <option value="put">PUT</option>
+                        <option value="delete">DELETE</option>
+                    </select>
+                    <input required="true" type="url" name="url" placeholder="url">
+                    <button type="submit" class="main_btn">Send</button>
+                </form>
+            </section>
+            <section id="headers">
+                <h3>Headers</h3>
+                <div id="headers_container">
+                    <p>No headers added!</p>
+                </div>
+                <form id="headers_form">
+                    <input required="true" type="text" name="key" placeholder="key" />
+                    <input required="true" type="text" name="value" placeholder="value" />
+                    <button type="submit" id="add_header">Add header</button>
+                </form>
+            </section>
+            <section id="body">
+                <h3>Body</h3>
+                <div id="body_container">
+                    <p>No body data!</p>
+                </div>
+                <form id="body_form">
+                    <select required="true" name="content_type" id="content_type">
+                        <option value="application/json">Json</option>
+                        <option value="application/text">Text</option>
+                    </select>
+                    <textarea required="true" type="json" rows="4" name="body"></textarea>
+                    <button type="submit" id="add_body">Add body</button>
+                    <p id="body_error"></p>
+                </form>
+            </section>
+        </div>
+        <section class="right">
             <h3>Response</h3>
+            <div id="response_header" class="response_header">
+                <p>URL: <span id="res_url"></span></p>
+                <p>Status: <span id="res_status"></span></p>
+                <p>Type: <span id="res_type"></span></p>
+            </div>
             <div id="response">
                 <p>Your response will appear here!</p>
-
             </div>
         </section>
     </main>
+    <footer>
+        <p>APIyzer &copy; 2024 by <a href="https://coderkwan.com">coderkwan</a></p>
+    </footer>
 </body>
 <script src="script.js"></script>
 
