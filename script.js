@@ -11,7 +11,6 @@ const res_status = document.getElementById('res_status')
 
 let headers = [];
 let body = '';
-let content_type = '';
 
 form.addEventListener('submit', async (e) => {
     response_header.style.display = "none"
@@ -27,20 +26,46 @@ form.addEventListener('submit', async (e) => {
 
     try {
         if (method != 'get') {
-            final_hearder['Content-Type'] = content_type
             const payload = {method: method, headers: final_hearder, body: (body)}
             const data = await fetch(url, payload)
-            const res = await data.json()
-            makeResponse(JSON.stringify(res), data)
             console.log(data)
-            response_header.style.display = "flex"
+
+            const type = data.headers.get("Content-Type")
+
+            switch (type) {
+                case 'application/json':
+                    const res = await data.json()
+                    makeResponse(JSON.stringify(res, null, 3), data)
+                    break
+                case 'text/plain':
+                    const resi = await data.text()
+                    makeResponse(resi, data)
+                    break
+                default:
+                    const reso = "Only JSON and Plain Text is supported as a response Content-Type. Your response neither JSON nor Plain Text."
+                    makeResponse(res, null, true)
+                    break
+            }
+
         } else {
             const payload = {method: method, headers: final_hearder}
             const data = await fetch(url, payload)
-            const res = await data.json()
-            makeResponse(JSON.stringify(res), data)
-            console.log(data)
-            response_header.style.display = "flex"
+            const type = data.headers.get("Content-Type")
+
+            switch (type) {
+                case 'application/json':
+                    const res = await data.json()
+                    makeResponse(JSON.stringify(res, null, 3), data)
+                    break
+                case 'text/plain':
+                    const resi = await data.text()
+                    makeResponse(resi, data)
+                    break
+                default:
+                    const reso = "Only JSON and Plain Text is supported as a response Content-Type. Your response neither JSON nor Plain Text."
+                    makeResponse(reso, null, true)
+                    break
+            }
         }
 
 
@@ -87,7 +112,6 @@ headers_form.addEventListener('submit', (e) => {
 body_form.addEventListener('submit', (e) => {
     e.preventDefault()
     body = e.target.body.value
-    content_type = e.target.content_type.value
 
     body_container.innerHTML = ''
 
@@ -98,7 +122,6 @@ body_form.addEventListener('submit', (e) => {
     node_delete.addEventListener('click', (i) => {
         body_container.innerHTML = ''
         body = ''
-
     })
 
     const node = document.createElement('p')
@@ -107,11 +130,14 @@ body_form.addEventListener('submit', (e) => {
     body_container.appendChild(node_delete)
 })
 
-function makeResponse(res, data) {
+function makeResponse(res, data, type_error) {
     response.innerText = res
-    if (data != null) {
+    if (data != null && !type_error) {
+        response_header.style.display = "flex"
         res_type.innerText = data.type
         res_url.innerText = data.url
         res_status.innerText = data.status
+    } else {
+        response_header.style.display = "none"
     }
 }

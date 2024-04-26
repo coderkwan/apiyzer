@@ -70,6 +70,7 @@ select {
 
 #response {
     padding: 20px 0;
+    word-wrap: break-word;
 }
 
 #response_header {
