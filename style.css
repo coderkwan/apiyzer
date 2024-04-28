@@ -46,7 +46,7 @@ button,
 select,
 textarea {
     padding: 10px 18px;
-    border: 1px solid #ededed;
+    border: 1px solid #959695;
     border-radius: 4px;
     font-size: 16px;
 }
@@ -136,7 +136,6 @@ input {
     width: 100%;
     flex: 1;
     background-color: #ededed;
-    border: none;
 }
 
 textarea {
