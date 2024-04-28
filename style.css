@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
 }
 
 body {
@@ -7,6 +8,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #ebebeb;
 }
 
 main {
@@ -14,6 +16,10 @@ main {
     width: 100%;
     display: flex;
     gap: 30px;
+}
+
+p {
+    color: #1c1c1c;
 }
 
 .left {
@@ -28,33 +34,56 @@ main {
 }
 
 section {
+    background-color: #f5f5f5;
     padding: 30px;
     border-radius: 10px;
-    border: 1px solid gray;
+    border: 1px solid #ededed;
+    box-shadow: 1px 1px 12px 1px #ededed;
 }
 
 input,
 button,
 select,
 textarea {
-    padding: 5px 18px;
-    border: 1px solid gray;
+    padding: 10px 18px;
+    border: 1px solid #ededed;
     border-radius: 4px;
     font-size: 16px;
 }
 
 button {
+    color: white;
+    background-color: black;
+}
+
+button {
     cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+button:hover {
+    opacity: 0.8;
 }
 
 select {
     background-color: transparent;
 }
 
+#headers_form {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+
 .each_header {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto auto 20%;
     gap: 8px;
     align-items: center;
+}
+
+.each_header p {
+    width: 100%;
 }
 
 #body_container {
@@ -83,7 +112,8 @@ select {
 }
 
 .deleter {
-    background-color: tomato;
+    font-size: 12px;
+    background-color: #ff618b;
     color: white;
 }
 
@@ -97,15 +127,21 @@ form {
 
 .main_btn {
     background-color: lightgreen;
+    color: black;
+    border: none;
     text-transform: uppercase;
 }
 
 input {
+    width: 100%;
     flex: 1;
+    background-color: #ededed;
+    border: none;
 }
 
 textarea {
     width: 100%;
+    background-color: #f0f0f0;
 }
 
 h3 {

@@ -88,7 +88,9 @@ headers_form.addEventListener('submit', (e) => {
         node.classList.add('each_header')
 
         const node_content = document.createElement('p')
-        node_content.innerText = `${item.key} : ${item.value}`
+        const node_content_2 = document.createElement('p')
+        node_content.innerText = item.key
+        node_content_2.innerText = item.value
 
         const node_delete = document.createElement('button')
         node_delete.classList.add('deleter')
@@ -103,9 +105,12 @@ headers_form.addEventListener('submit', (e) => {
         })
 
         node.appendChild(node_content)
+        node.appendChild(node_content_2)
         node.appendChild(node_delete)
 
         headers_container.appendChild(node)
+        e.target.key.value = ''
+        e.target.value.value = ''
     })
 })
 
@@ -128,6 +133,8 @@ body_form.addEventListener('submit', (e) => {
     node.innerText = body
     body_container.appendChild(node)
     body_container.appendChild(node_delete)
+
+    e.target.body.value = ''
 })
 
 function makeResponse(res, data, type_error) {
