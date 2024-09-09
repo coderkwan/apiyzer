@@ -8,7 +8,6 @@ const body_form = document.getElementById('body_form')
 const body_form_multipart = document.getElementById('body_form_multipart')
 const multipart_type = document.getElementById('multipart_type')
 const add_body_multipart = document.getElementById('add_body_multipart')
-const res_url = document.getElementById('res_url')
 const res_type = document.getElementById('res_type')
 const res_status = document.getElementById('res_status')
 const body_type = document.getElementById('body_type')
@@ -77,16 +76,17 @@ form.addEventListener('submit', async (e) => {
             const data = await fetch(url, payload)
 
             const type = data.headers.get("Content-Type")
-            switch (type) {
-                case 'application/json; charset=utf-8':
+
+            switch (type.split(';')[0].replace(';', '')) {
+                case 'application/json':
                     const res = await data.json()
                     makeResponse(JSON.stringify(res, null, 3), data, 'application/json')
                     break
-                case 'text/plain; charset=utf-8':
+                case 'text/plain':
                     const resi = await data.text()
                     makeResponse(resi, data)
                     break
-                case 'text/html; charset=utf-8':
+                case 'text/html':
                     const resip = await data.text()
                     makeResponse(resip, data, 'text/html')
                     break
@@ -101,16 +101,16 @@ form.addEventListener('submit', async (e) => {
             const data = await fetch(url, payload)
             const type = data.headers.get("Content-Type")
 
-            switch (type) {
-                case 'application/json; charset=utf-8':
+            switch (type.split(' ')[0].replace(';', '')) {
+                case 'application/json':
                     const res = await data.json()
                     makeResponse(JSON.stringify(res, null, 5), data, 'application/json')
                     break
-                case 'text/plain; charset=utf-8':
+                case 'text/plain':
                     const resi = await data.text()
                     makeResponse(resi, data)
                     break
-                case 'text/html; charset=utf-8':
+                case 'text/html':
                     const resip = await data.text()
                     makeResponse(resip, data, 'text/html')
                     break
@@ -210,7 +210,6 @@ function makeResponse(res, data, format, type_error) {
     if (data != null && !type_error) {
         response_header.style.display = "flex"
         res_type.innerText = data.headers.get('content-type')
-        res_url.innerText = data.url
         res_status.innerText = data.status
         switch (format) {
             case 'application/json':
@@ -221,8 +220,16 @@ function makeResponse(res, data, format, type_error) {
                 pre.append(code)
                 response.appendChild(pre)
                 break
-            case 'text/html': response.innerHTML = res; break
-            default: response.innerText = res; break
+            case 'text/html':
+                response.innerHTML = res;
+                break
+            default:
+                let el = document.createElement('div')
+                el.classList.add('response_holder')
+                el.innerText = res;
+                response.innerHTML = ''
+                response.append(el)
+                break
 
         }
     } else {
@@ -272,8 +279,10 @@ body_form.addEventListener('submit', (e) => {
             c.innerText = JSON.stringify(good_body, null, 4)
             node.append(c)
         } else {
-            node = document.createElement('p')
-            node.innerText = good_body
+            node = document.createElement('pre')
+            let r = document.createElement('code')
+            r.innerText = good_body
+            node.append(r)
         }
         body = good_body
         body_container.appendChild(node)

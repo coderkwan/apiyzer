@@ -16,22 +16,24 @@
 </head>
 
 <body>
+    <div class="top">
+        <section id="url_verb">
+            <form id="main_form">
+                <select required="true" name="verb" id="verb">
+                    <option value="get">GET</option>
+                    <option value="POST">POST</option>
+                    <option value="put">PUT</option>
+                    <option value="delete">DELETE</option>
+                </select>
+                <input required="true" type="url" name="url" placeholder="url">
+                <button type="submit" class="main_btn">Send</button>
+            </form>
+        </section>
+    </div>
     <main>
         <div class="left">
-            <section id="url_verb">
-                <form id="main_form">
-                    <select required="true" name="verb" id="verb">
-                        <option value="get">GET</option>
-                        <option value="POST">POST</option>
-                        <option value="put">PUT</option>
-                        <option value="delete">DELETE</option>
-                    </select>
-                    <input required="true" type="url" name="url" placeholder="url">
-                    <button type="submit" class="main_btn">Send</button>
-                </form>
-            </section>
             <section id="headers">
-                <h3>Headers</h3>
+                <h3>Request Headers</h3>
                 <div id="headers_container">
                 </div>
                 <form id="headers_form">
@@ -42,7 +44,7 @@
             </section>
 
             <section id="params">
-                <h3>Params</h3>
+                <h3>Query Params</h3>
                 <div id="params_container">
                 </div>
                 <form id="params_form">
@@ -53,7 +55,7 @@
             </section>
             <section id="body">
                 <div style="display: flex; gap:10px; align-items: center;">
-                    <h3>Body</h3>
+                    <h3>Request Body</h3>
                     <div>
                         <select name="body_type" id="body_type">
                             <option value="application/json" selected>Json</option>
@@ -86,7 +88,6 @@
         <section class="right">
             <h3>Response</h3>
             <div id="response_header" class="response_header">
-                <p>URL: <span id="res_url"></span></p>
                 <p>Status: <span id="res_status"></span></p>
                 <p>Type: <span id="res_type"></span></p>
             </div>
