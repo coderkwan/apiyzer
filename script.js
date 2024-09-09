@@ -28,7 +28,7 @@ form.addEventListener('submit', async (e) => {
 
     let url = (e.target.url.value)
     const method = (e.target.verb.value)
-    const final_hearder = {'Access-Control-Allow-Origin': "*"}
+    const final_hearder = {'Access-Control-Request-Method': 'GET', 'Access-Control-Request-Headers': '*'}
     let final_body = {}
 
     headers.forEach((item) => {
