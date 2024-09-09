@@ -60,8 +60,6 @@ form.addEventListener('submit', async (e) => {
         }
     }
 
-    console.log(url)
-
     try {
         if (method != 'get') {
             let send_body = ''
@@ -69,7 +67,6 @@ form.addEventListener('submit', async (e) => {
                 final_hearder['Content-Type'] = body_type.value
                 send_body = final_body
             } else {
-                console.log(final_body)
                 let fd = new FormData()
                 for (let k in final_body) {
                     fd.append(k, final_body[k])
@@ -77,7 +74,6 @@ form.addEventListener('submit', async (e) => {
                 send_body = fd
             }
             const payload = {method: method, headers: final_hearder, body: send_body}
-            console.log(payload)
             const data = await fetch(url, payload)
 
             const type = data.headers.get("Content-Type")
@@ -101,8 +97,7 @@ form.addEventListener('submit', async (e) => {
             }
 
         } else {
-
-            const payload = {method: method, headers: final_hearder, body: final_body}
+            const payload = {method: method, headers: final_hearder}
             const data = await fetch(url, payload)
             const type = data.headers.get("Content-Type")
 
@@ -130,7 +125,6 @@ form.addEventListener('submit', async (e) => {
     } catch (e) {
         const res = "Failed to fetch"
         makeResponse(res)
-        console.log(e)
     }
 })
 
@@ -251,7 +245,6 @@ body_form.addEventListener('submit', (e) => {
                 JSON.parse(n_body)
                 correct_body = true
             } catch (e) {
-                console.log('Not good json', e)
             }
             break
         case 'text/plain':
@@ -317,8 +310,6 @@ multipart_type.addEventListener('change', (e) => {
 body_form_multipart.addEventListener('submit', (e) => {
     e.preventDefault()
     multiparts.push({id: Math.random(), name: e.target.name.value, value: e.target.value.type == 'file' ? e.target.value.files[0] : e.target.value.value})
-
-    console.log(multiparts)
 
     body_container.innerHTML = ''
 
