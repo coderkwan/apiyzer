@@ -13,8 +13,12 @@ const res_type = document.getElementById('res_type')
 const res_status = document.getElementById('res_status')
 const body_type = document.getElementById('body_type')
 
+const add_param = document.getElementById('add_param')
+const params_container = document.getElementById('params_container')
+const params_form = document.getElementById('params_form')
 
 let headers = [];
+let params = []
 let multiparts = []
 let body = '';
 
@@ -22,7 +26,7 @@ form.addEventListener('submit', async (e) => {
     response_header.style.display = "none"
     e.preventDefault();
 
-    const url = (e.target.url.value)
+    let url = (e.target.url.value)
     const method = (e.target.verb.value)
     const final_hearder = {}
     let final_body = {}
@@ -38,6 +42,25 @@ form.addEventListener('submit', async (e) => {
     } else {
         final_body = body
     }
+    let parass = ''
+    params.forEach((p, i) => {
+        if (i != params.length - 1) {
+            parass += `${p.key}=${p.value}&`
+        } else {
+            parass += `${p.key}=${p.value}`
+        }
+
+    })
+
+    if (parass.length) {
+        if (url.includes("?")) {
+            url += "&" + parass
+        } else {
+            url += "?" + parass
+        }
+    }
+
+    console.log(url)
 
     try {
         if (method != 'get') {
@@ -78,6 +101,7 @@ form.addEventListener('submit', async (e) => {
             }
 
         } else {
+
             const payload = {method: method, headers: final_hearder, body: final_body}
             const data = await fetch(url, payload)
             const type = data.headers.get("Content-Type")
@@ -147,6 +171,46 @@ headers_form.addEventListener('submit', (e) => {
         e.target.value.value = ''
     })
 })
+
+params_form.addEventListener('submit', (e) => {
+    e.preventDefault()
+    params.push({id: Math.random(), key: e.target.key.value, value: e.target.value.value})
+
+    params_container.innerHTML = ''
+
+    params.forEach((item) => {
+        const node = document.createElement('div')
+        node.id = item.id
+        node.classList.add('each_param')
+
+        const node_content = document.createElement('p')
+        const node_content_2 = document.createElement('p')
+        node_content.innerText = item.key
+        node_content_2.innerText = item.value
+
+        const node_delete = document.createElement('button')
+        node_delete.classList.add('deleter')
+        node_delete.innerText = 'Remove'
+
+        node_delete.addEventListener('click', (i) => {
+            i.target.parentNode.remove();
+
+            params = params.filter((it) => {
+                return it.id != item.id
+            })
+        })
+
+        node.appendChild(node_content)
+        node.appendChild(node_content_2)
+        node.appendChild(node_delete)
+
+        params_container.appendChild(node)
+        e.target.key.value = ''
+        e.target.value.value = ''
+    })
+})
+
+
 
 function makeResponse(res, data, format, type_error) {
     if (data != null && !type_error) {

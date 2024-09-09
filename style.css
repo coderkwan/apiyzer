@@ -13,7 +13,7 @@ body {
 }
 
 main {
-    max-width: 1400px;
+    max-width: 2000px;
     width: 100%;
     display: flex;
     gap: 30px;
@@ -65,20 +65,23 @@ select {
     background-color: #cacacc
 }
 
-#headers_form {
+#headers_form,
+#params_form {
     display: grid;
     grid-template-columns: auto auto auto;
 }
 
 
-.each_header {
+.each_header,
+.each_param {
     display: grid;
     grid-template-columns: auto auto 20%;
     gap: 8px;
     align-items: center;
 }
 
-.each_header p {
+.each_header p,
+.each_param p {
     width: 100%;
 }
 
@@ -153,10 +156,20 @@ footer {
     color: dodgerblue;
 }
 
-code {
+pre {
     display: block;
     font-family: monospace;
     background-color: black;
+    background-color: #171821;
+    padding: 25px;
+    border-radius: 8px;
+    overflow: scroll;
+}
+
+code {
+    display: block;
+    font-family: monospace;
+    background-color: #171821;
     padding: 10px;
     border-radius: 8px;
 }
