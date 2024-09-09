@@ -33,7 +33,6 @@
             <section id="headers">
                 <h3>Headers</h3>
                 <div id="headers_container">
-                    <p>No headers added!</p>
                 </div>
                 <form id="headers_form">
                     <input required="true" type="text" name="key" placeholder="key" />
@@ -42,13 +41,33 @@
                 </form>
             </section>
             <section id="body">
-                <h3>Body</h3>
+                <div style="display: flex; gap:10px; align-items: center;">
+                    <h3>Body</h3>
+                    <div>
+                        <select name="body_type" id="body_type">
+                            <option value="application/json" selected>Json</option>
+                            <option value="text/plain">Text</option>
+                            <option value="multipart/form-data">Form-data</option>
+                        </select>
+                    </div>
+                </div>
                 <div id="body_container">
-                    <p>No body data!</p>
                 </div>
                 <form id="body_form">
-                    <textarea required="true" type="json" rows="4" name="body"></textarea>
+                    <textarea required="true" type="text" rows="4" name="body"></textarea>
                     <button type="submit" id="add_body">Add body</button>
+                    <p id="body_error"></p>
+                </form>
+                <form id="body_form_multipart" style="display: none;">
+                    <div style="display: flex; gap: 5px;">
+                        <input type="text" name="name" id="multipart_name" required placeholder="Name">
+                        <select name="multipart_type" id="multipart_type">
+                            <option value="file">File</option>
+                            <option value="text">Text</option>
+                        </select>
+                        <input type="file" name="value" id="multipart_input" required placeholder="Value">
+                        <button type="submit" id="add_body_multipart">Add body</button>
+                    </div>
                     <p id="body_error"></p>
                 </form>
             </section>

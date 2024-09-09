@@ -8,7 +8,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #ebebeb;
+    background-color: #141317;
+    color: white;
 }
 
 main {
@@ -16,10 +17,6 @@ main {
     width: 100%;
     display: flex;
     gap: 30px;
-}
-
-p {
-    color: #1c1c1c;
 }
 
 .left {
@@ -34,11 +31,10 @@ p {
 }
 
 section {
-    background-color: #f5f5f5;
+    background-color: #241f31;
     padding: 30px;
     border-radius: 10px;
     border: 1px solid #ededed;
-    box-shadow: 1px 1px 12px 1px #ededed;
 }
 
 input,
@@ -66,7 +62,7 @@ button:hover {
 }
 
 select {
-    background-color: transparent;
+    background-color: #cacacc
 }
 
 #headers_form {
@@ -149,4 +145,18 @@ h3 {
 
 footer {
     margin: 5rem 0;
+}
+
+.hint {
+    font-size: 11px;
+    margin: 0;
+    color: dodgerblue;
+}
+
+code {
+    display: block;
+    font-family: monospace;
+    background-color: black;
+    padding: 10px;
+    border-radius: 8px;
 }
